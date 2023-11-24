@@ -1,6 +1,13 @@
 const http = require('http');
 const express = require('express');
 const app = express();
+app.use(express.urlencoded({extended:false}))
+app.use((req, res, next) => {
+    console.log('Time:', Date.now())
+    next()
+    //return res.send("sdfsdf");
+
+  })
 const PORT = 8080;
 const users = [
     [1,'Sada','Oloshkin','soloshkin0@geocities.jp','Female'],
@@ -21,24 +28,36 @@ app.get("/about",(req,res) =>{
 
 
 app.get("/apis/users",(req,res) =>{
-    return res.json(users);
+    console.log(req.body);
+    return res.status(265).json(users);
 });
 
-app.get("/apis/users/:id",(req,res) =>{
-    return res.json({"name":"test","id":req.params.id});
-});
+// app.get("/apis/users/:id",(req,res) =>{
+//     return res.json({"name":"test","id":req.params.id});
+// });
  
-app.delete("/apis/users/:id",(req,res) =>{
-    return res.json({"name":"test","id":req.params.id});
-});
+// app.delete("/apis/users/:id",(req,res) =>{
+//     return res.json({"name":"test","id":req.params.id});
+// });
  
-app.patch("/apis/users/:id",(req,res) =>{
-    return res.json({"name":"test","id":req.params.id});
-});
+// app.patch("/apis/users/:id",(req,res) =>{
+//     return res.json({"name":"test","id":req.params.id});
+// });
 
-app.post("/apis/users/:id",(req,res) =>{
+// app.post("/apis/users/:id",(req,res) =>{
+//     return res.json({"name":"test","id":req.params.id});
+// });
+
+
+app.route("/apis/users/:id").get((req,res) =>{
     return res.json({"name":"test","id":req.params.id});
-});
+}).delete((req,res) =>{
+    return res.json({"name":"tdest","id":req.params.id});
+}).patch((req,res) =>{
+    return res.json({"name":"tpest","id":req.params.id});
+}).post((req,res) =>{
+        return res.json({"name":"teppst","id":req.params.id});
+    });
  
 
 // const FinalServer = http.createServer(app);
