@@ -1,6 +1,23 @@
 const http = require('http');
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+    firstName:String,
+    LastName:String
+})
+
+
+const Users = mongoose.model('test',userSchema);
+
+mongoose
+.connect("mongodb://0.0.0.0:27017/myprojects")
+.then(() => console.log("connected") )
+.catch((err) => console.log("mongoDB err",err) )
+var usser =   Users.find({});
+console.log("dfdsfsf",usser,'sdfdsf');
+
 app.use(express.urlencoded({extended:false}))
 app.use((req, res, next) => {
     console.log('Time:', Date.now())
