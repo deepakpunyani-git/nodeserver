@@ -1,6 +1,12 @@
 const http = require('http');
 const express = require('express');
 const app = express();
+const path = require('path');
+
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+app.set('views',path.resolve("./views"));
+
 
 const {connectDB} = require('./connection.js');
 connectDB("mongodb://0.0.0.0:27017/myprojects").then((err) =>{
