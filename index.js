@@ -3,7 +3,9 @@ const express = require('express');
 const app = express();
 
 const {connectDB} = require('./connection.js');
-connectDB("mongodb://0.0.0.0:27017/myprojects")
+connectDB("mongodb://0.0.0.0:27017/myprojects").then((err) =>{
+    console.log("mongoDB connected")
+})
 
 
 const {timeLog} = require('./middlewares');
